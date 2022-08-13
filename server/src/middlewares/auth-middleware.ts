@@ -4,7 +4,7 @@ import { TokenPayload } from '../types/types';
 
 import { validateToken } from '../utils/jwt.util';
 
-export const authorize = async(req: Request, res: Response, next: NextFunction) => {
+export default async(req: Request, res: Response, next: NextFunction) => {
   let jwt: string | undefined = req.headers.authorization; 
   if(!jwt) {
     throw new AuthenticationError('Token not available'); 
@@ -13,7 +13,7 @@ export const authorize = async(req: Request, res: Response, next: NextFunction) 
     throw new AuthenticationError('Token not valid'); 
   }
 
-  let decodedToken: TokenPayload = await validateToken(jwt.split(' ')[1]);
+  let decodedToken = await validateToken(jwt.split(' ')[1]);
   try {
     const {id, passwordHash} = decodedToken;
     req.body.user = {

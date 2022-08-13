@@ -1,5 +1,5 @@
-import { sign, SignOptions, verify, VerifyOptions } from 'jsonwebtoken';
-import { TokenPayload } from '../types/types';
+import { JwtPayload, sign, SignOptions, verify, VerifyOptions } from 'jsonwebtoken';
+import { TokenPayload, User } from '../types/types';
 import dotenv from 'dotenv';
 import { CustomError } from '../errors';
 dotenv.config();
@@ -25,18 +25,13 @@ export const generateToken = async (id: string, passwordHash: string) => {
   return token;
 }
 
-export const validateToken = async (token: string): Promise<TokenPayload> => {
+export const validateToken = async (token: string): Promise<any> => {
   const secretKey: string | undefined = process.env.JWT_SECRET;
 
   if (!secretKey) {
     throw new CustomError('JWT key not Provided');
   }
 
-  const opt: VerifyOptions = {
-    algorithms: ['RS256'],
-  }
-  return new Promise(async (resolve, reject) => {
-    const decoded = verify(token, secretKey, opt)
-    return decoded;
-  })
+  const decoded = verify(token, secretKey);
+  return decoded;
 }

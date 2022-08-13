@@ -11,9 +11,11 @@ dotenv.config();
 // middleware
 import notFoundMiddleware from './middlewares/not-found';
 import customErrorHandler from './middlewares/error-handler';
+import authMiddleware from './middlewares/auth-middleware';
 
 // router
 import authRouter from './routes/auth.route';
+import cardRouter from './routes/card.route';
 
 const app: Express = express(); 
 const port = process.env.PORT; 
@@ -27,6 +29,7 @@ app.use('/api/v1/ping', (req: Request, res: Response) => {
 });
 
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/card', authMiddleware, cardRouter);
 
 app.use(notFoundMiddleware); 
 app.use(customErrorHandler); 

@@ -29,7 +29,7 @@ model CardsCombo {
 model RedCard {
   id         String       @id @default(auto()) @map("_id") @db.ObjectId
   CardsCombo CardsCombo[]
-  Question   String
+  question   String
   User       User?        @relation(fields: [userId], references: [id])
   userId     String?      @db.ObjectId
 }
@@ -37,7 +37,7 @@ model RedCard {
 model BlueCard {
   id         String       @id @default(auto()) @map("_id") @db.ObjectId
   CardsCombo CardsCombo[]
-  Answer     String
+  answer     String
   User       User?        @relation(fields: [userId], references: [id])
   userId     String?      @db.ObjectId
 }

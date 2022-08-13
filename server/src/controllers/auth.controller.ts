@@ -36,6 +36,6 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
   const { id } = loginUser;
   const token: string = await generateToken(id, passwordHash);
   return res.status(StatusCodes.CREATED).json({
-    userToken: token,
+    userToken: `Bearer ${token}`,
   });
 }
