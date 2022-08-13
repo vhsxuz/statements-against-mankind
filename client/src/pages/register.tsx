@@ -17,7 +17,7 @@ function register() {
         </Button>
       </FormControl>
     </Stack>
-  )
+  );
 }
 
 export default register;
