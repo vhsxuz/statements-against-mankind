@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { BadRequestError, CustomError } from '../errors';
-import { createBlueCard, createRedCard, getRandomRedCard } from '../models/card';
+import { createBlueCard, createRedCard, getRandomRedCard, getRandomBlueCards } from '../models/card';
 import { Card } from '../types/types';
 
 export const postBlueCard = async (req: Request, res: Response, next: NextFunction) => {
@@ -32,12 +32,14 @@ export const postRedCard = async (req: Request, res: Response, next: NextFunctio
 
 export const getGameSessionCard = async (req: Request, res: Response, next: NextFunction) => {
   const redCard: Card | null = await getRandomRedCard();
+  const blueCards: Card[] | null = await getRandomBlueCards();
   if (!redCard) {
     throw new CustomError('No Card(s) available');
   }
   return res.status(StatusCodes.OK).json({
     success: true,
     redCard: redCard,
+    blueCards: blueCards,
   });
 };
 
