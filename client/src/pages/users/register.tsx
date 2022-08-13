@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Center, FormControl, FormLabel, Heading, Input, Stack } from '@chakra-ui/react';
+import { Link } from "react-router-dom";
+import Axios from 'axios';
 
-function register() {
+function Register() {
+  const [usernameReg, setUsernameReg] = useState('');
+  const [passwordReg, setPasswordReg] = useState('');
+
+  Axios.defaults.withCredentials = true;
+
+  const register = () => {
+    Axios.post("http://localhost:8000/auth/register", {
+      username: usernameReg,
+      password: passwordReg,
+    }).then((response) => {
+      console.log(response);
+    });
+  }
+
   return (
     <Stack>
       <Center mt="20">
@@ -9,15 +25,28 @@ function register() {
       </Center>
       <FormControl isRequired ps="56" pe="56" pt="8">
         <FormLabel>Username</FormLabel>
-        <Input placeholder='Username' />
+        <Input
+          placeholder='Username'
+          onChange={(e) => {
+            setUsernameReg(e.target.value);
+          }}
+        />
         <FormLabel pt="4">Password</FormLabel>
-        <Input type='password' placeholder='Password' />
-        <Button colorScheme='teal' mt="4">
-          Sign Up
-        </Button>
+        <Input
+          type='password'
+          placeholder='Password'
+          onChange={(e) => {
+            setPasswordReg(e.target.value);
+          }}
+        />
+        <Link to="/login">
+          <Button colorScheme='teal' mt="4" onClick={register}>
+            Sign Up
+          </Button>
+        </Link>
       </FormControl>
     </Stack>
   );
 }
 
-export default register;
+export default Register;
