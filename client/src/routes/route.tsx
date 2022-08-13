@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
-import Login from '../pages/login';
-import Register from '../pages/register';
+import Login from '../pages/users/login';
+import Register from '../pages/users/register';
 import Home from '../pages/home';
 import ErrorPage from '../pages/error-page';
-import AddCard from '../pages/add-card';
-import UpdateCard from "../pages/update-card";
+import AddCard from '../pages/cards/add-card';
+import UpdateCard from "../pages/cards/update-card";
 
 function route() {
   return (
