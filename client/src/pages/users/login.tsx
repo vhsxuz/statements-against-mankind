@@ -5,23 +5,21 @@ import Axios from 'axios';
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loginStatus, setLoginStatus] = useState('false');
+  const [loginStatus, setLoginStatus] = useState(false);
 
   Axios.defaults.withCredentials = true;
 
   const login = () => {
-    Axios.post("http://localhost:8000/auth/login", {
+    Axios.post('http://localhost:8000/api/v1/auth/login', {
       username: username,
       password: password,
     }).then((response) => {
-      if (!response) {
-        setLoginStatus('false');
-        console.log(loginStatus);
-      }
-      else {
-        setLoginStatus('true');
-        console.log(loginStatus);
-      }
+      let token = response.data.access;
+      localStorage.setItem("SavedToken", 'Bearer ' + token);
+      Axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+      setLoginStatus(true)
+    }).catch((error) => {
+      console.log(error)
     });
   }
 
@@ -50,6 +48,7 @@ function Login() {
           Login
         </Button>
       </FormControl>
+      <Heading> {loginStatus}</Heading>
     </Stack>
   );
 }
