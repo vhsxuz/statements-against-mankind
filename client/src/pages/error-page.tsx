@@ -1,9 +1,17 @@
+import { Center, Heading, HStack, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
 
 function errorPage() {
   return (
-    <div>errorPage</div>
-  )
+    <Stack>
+      <Center mt="48">
+        <Heading> Error 404</Heading>
+      </Center>
+      <Center>
+        <Heading>Page Not Found</Heading>
+      </Center>
+    </Stack >
+  );
 }
 
 export default errorPage;
