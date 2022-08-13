@@ -4,9 +4,9 @@
   "description": "a cards against humanity like board game created in typescript language",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1", 
-    "start": "node dist/app.js", 
-    "build": "npx tsc", 
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/app.js",
+    "build": "npx tsc",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
   },
   "repository": {
@@ -22,6 +22,8 @@
   "homepage": "https://github.com/vhsxuz/statements-against-mankinds#readme",
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/morgan": "^1.9.3",
     "@types/node": "^18.7.2",
     "cors": "^2.8.5",
     "nodemon": "^2.0.19",
@@ -32,6 +34,8 @@
     "@prisma/client": "^4.2.1",
     "dotenv": "^16.0.1",
     "express-async-errors": "^3.1.1",
-    "http-status-codes": "^2.2.0"
+    "http-status-codes": "^2.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0"
   }
 }
