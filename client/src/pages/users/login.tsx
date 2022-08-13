@@ -27,6 +27,7 @@ function Login() {
     <Stack>
       <Center mt="20">
         <Heading size='lg'>Login</Heading>
+        <Heading> {loginStatus === false ? "false" : "true"}</Heading>
       </Center>
       <FormControl isRequired ps="56" pe="56" pt="8">
         <FormLabel>Username</FormLabel>
@@ -48,7 +49,7 @@ function Login() {
           Login
         </Button>
       </FormControl>
-      <Heading> {loginStatus}</Heading>
+
     </Stack>
   );
 }
