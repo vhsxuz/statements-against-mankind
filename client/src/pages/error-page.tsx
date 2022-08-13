@@ -1,4 +1,4 @@
-import { Center, Heading, HStack, Stack, Text } from '@chakra-ui/react';
+import { Center, Heading, Stack } from '@chakra-ui/react';
 import React from 'react';
 
 function errorPage() {

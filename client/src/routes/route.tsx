@@ -7,7 +7,7 @@ import ErrorPage from '../pages/error-page';
 import AddCard from '../pages/cards/add-card';
 import UpdateCard from "../pages/cards/update-card";
 
-function route() {
+function Routing() {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
@@ -20,4 +20,4 @@ function route() {
   );
 }
 
-export default route;
+export default Routing;
