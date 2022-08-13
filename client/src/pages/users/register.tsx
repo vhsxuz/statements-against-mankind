@@ -7,10 +7,10 @@ function Register() {
   const [usernameReg, setUsernameReg] = useState('');
   const [passwordReg, setPasswordReg] = useState('');
 
-  Axios.defaults.withCredentials = true;
+  Axios.defaults.withCredentials = false;
 
   const register = () => {
-    Axios.post("http://localhost:8000/auth/register", {
+    Axios.post("http://localhost:8000/api/v1/auth/register", {
       username: usernameReg,
       password: passwordReg,
     }).then((response) => {
