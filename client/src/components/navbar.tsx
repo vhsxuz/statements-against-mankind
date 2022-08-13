@@ -7,6 +7,7 @@ import {
   ButtonGroup,
   Button,
 } from '@chakra-ui/react';
+import { Link } from "react-router-dom";
 
 function navbar() {
   return (
@@ -16,8 +17,12 @@ function navbar() {
       </Box>
       <Spacer />
       <ButtonGroup gap='2'>
-        <Button colorScheme='teal' size='sm'>Sign Up</Button>
-        <Button colorScheme='teal' size='sm'>Log in</Button>
+        <Link to='/register'>
+          <Button colorScheme='teal' size='sm'>Sign Up</Button>
+        </Link>
+        <Link to='/login'>
+          <Button colorScheme='teal' size='sm'>Log in</Button>
+        </Link>
       </ButtonGroup>
     </Flex>
   );
