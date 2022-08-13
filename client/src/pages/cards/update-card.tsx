@@ -1,4 +1,4 @@
-import { Stack, Center, Heading, FormControl, FormLabel, Textarea, Button, Flex, useControllableState, extendTheme } from '@chakra-ui/react';
+import { Stack, Center, Heading, FormControl, FormLabel, Textarea, Button, Flex, useControllableState } from '@chakra-ui/react';
 import React from 'react';
 
 function UpdateCard() {
