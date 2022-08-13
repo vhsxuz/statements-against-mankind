@@ -8,9 +8,9 @@ function Register() {
   const [passwordReg, setPasswordReg] = useState('');
 
   Axios.defaults.withCredentials = false;
-
-  const register = () => {
-    Axios.post("http://localhost:8000/api/v1/auth/register", {
+  
+  const register = async () => {
+    await Axios.post("http://localhost:8000/api/v1/auth/register", {
       username: usernameReg,
       password: passwordReg,
     }).then((response) => {

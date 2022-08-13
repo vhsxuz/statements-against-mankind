@@ -8,8 +8,16 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
+import Axios from 'axios';
+import Login from '../pages/users/login';
 
 function navbar() {
+  const logout = () => {
+    let token = "";
+    localStorage.setItem("SavedToken", token);
+    Axios.defaults.headers.common['Authorization'] = token;
+  }
+  const currentToken = localStorage.getItem("SavedToken");
   return (
     <Flex minWidth='max-content' alignItems='center' gap='2' m='4'>
       <Box p='2'>
@@ -20,8 +28,14 @@ function navbar() {
         <Link to='/register'>
           <Button colorScheme='teal' size='sm'>Sign Up</Button>
         </Link>
-        <Link to='/login'>
-          <Button colorScheme='teal' size='sm'>Log in</Button>
+        <Link to={currentToken === "" ? "/login" : "/"}>
+          <Button
+            colorScheme='teal'
+            size='sm'
+            onClick={currentToken !== "" ? logout : () => { }}
+          >
+            {currentToken === "" ? "Login" : "Logout"}
+          </Button>
         </Link>
       </ButtonGroup>
     </Flex>
