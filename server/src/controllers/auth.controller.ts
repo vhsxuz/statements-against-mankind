@@ -19,6 +19,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
   const registeredUser = await createUser(username, password);
 
   return res.status(StatusCodes.CREATED).json({
+    success: true,
     registeredUser,
   })
 }
@@ -36,6 +37,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
   const { id } = loginUser;
   const token: string = await generateToken(id, passwordHash);
   return res.status(StatusCodes.CREATED).json({
-    userToken: `Bearer ${token}`,
+    success: true,
+    userToken: token,
   });
 }

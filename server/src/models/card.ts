@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { CustomError } from '../errors';
 import { Card } from '../types/types';
 const prisma = new PrismaClient();
 
@@ -18,4 +19,13 @@ export const createRedCard = async(question: string): Promise<Card> => {
     }
   });
   return card; 
+}
+
+export const getRandomRedCard = async(): Promise<Card | null> => {
+  const productsCount = await prisma.redCard.count();
+  const skip = Math.floor(Math.random() * productsCount);
+  const card: Card | null = await prisma.redCard.findFirst({
+    skip: skip,
+  })
+  return card;
 }
