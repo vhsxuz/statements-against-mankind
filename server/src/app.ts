@@ -17,6 +17,7 @@ import authMiddleware from './middlewares/auth-middleware';
 // router
 import authRouter from './routes/auth.route';
 import cardRouter from './routes/card.route';
+import cors from 'cors';
 
 const app: Express = express();
 const port = process.env.PORT;
