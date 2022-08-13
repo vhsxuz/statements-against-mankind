@@ -9,3 +9,35 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  username     String     @unique
+  passwordHash String
+  redCards     RedCard[]
+  blueCards    BlueCard[]
+}
+
+model CardsCombo {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  redCard    RedCard  @relation(fields: [redCardId], references: [id])
+  blueCard   BlueCard @relation(fields: [blueCardId], references: [id])
+  redCardId  String   @db.ObjectId
+  blueCardId String   @db.ObjectId
+}
+
+model RedCard {
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  CardsCombo CardsCombo[]
+  Question   String
+  User       User?        @relation(fields: [userId], references: [id])
+  userId     String?      @db.ObjectId
+}
+
+model BlueCard {
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  CardsCombo CardsCombo[]
+  Answer     String
+  User       User?        @relation(fields: [userId], references: [id])
+  userId     String?      @db.ObjectId
+}
