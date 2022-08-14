@@ -36,6 +36,10 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
   }
   const { id } = loginUser;
   const token: string = await generateToken(id, passwordHash);
+  res.cookie("token", token, {
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000,
+  });
   return res.status(StatusCodes.CREATED).json({
     success: true,
     userToken: token,

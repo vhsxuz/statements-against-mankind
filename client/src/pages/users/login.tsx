@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
 import { Button, Center, FormControl, FormLabel, Heading, Input, Stack } from '@chakra-ui/react';
 import Axios from 'axios';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginStatus, setLoginStatus] = useState(false);
+  const navigate = useNavigate();
 
   Axios.defaults.withCredentials = false;
 
-  const login = () => {
-    Axios.post('http://localhost:8000/api/v1/auth/login', {
+  const login = async (e: any) => {
+    e.preventDefault();
+    await Axios.post('http://localhost:8000/api/v1/auth/login', {
       username: username,
       password: password,
     }).then((response) => {
-      let token = response.data.userToken;
-      localStorage.setItem("SavedToken", token);
-      Axios.defaults.headers.common['Authorization'] = token;
-      setLoginStatus(true)
+      setLoginStatus(true);
+      const cookie = 'Bearer ' + response.data.userToken;
+      document.cookie = `token=${cookie}`;
+      navigate("/home");
     }).catch((error) => {
       console.log(error)
     });

@@ -2,19 +2,25 @@ import React, { useState } from 'react';
 import { Button, Center, FormControl, FormLabel, Heading, Input, Stack } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import Axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [usernameReg, setUsernameReg] = useState('');
   const [passwordReg, setPasswordReg] = useState('');
+  const navigate = useNavigate();
 
   Axios.defaults.withCredentials = false;
-  
-  const register = async () => {
+
+  const register = async (e: any) => {
+    e.preventDefault();
     await Axios.post("http://localhost:8000/api/v1/auth/register", {
       username: usernameReg,
       password: passwordReg,
     }).then((response) => {
       console.log(response);
+      navigate("/login");
+    }).catch((error) => {
+      console.log(error);
     });
   }
 
