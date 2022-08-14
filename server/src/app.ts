@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import { PrismaClient } from '@prisma/client';
 import cors from "cors";
+import cookieParser from 'cookie-parser';
 
 require('express-async-errors');
 
@@ -17,13 +18,13 @@ import authMiddleware from './middlewares/auth-middleware';
 // router
 import authRouter from './routes/auth.route';
 import cardRouter from './routes/card.route';
-import cors from 'cors';
 
 const app: Express = express();
 const port = process.env.PORT;
 const prisma = new PrismaClient();
 
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("dev"));
 
