@@ -5,20 +5,36 @@ import { Link } from 'react-router-dom';
 
 function Gameplay() {
   const [cards, setCards] = useState<any>([]);
+  const [blueCards, setBlueCards] = useState<any>([]);
   let token = document.cookie.slice(6);
 
   useEffect(() => {
     playCard();
+
   }, []);
 
+
   const playCard = async () => {
-    const response = await Axios.get('http://localhost:8000/api/v1/card/ffa', {
-      headers: {
-        Authorization: token,
-      }
-    });
-    console.log(await response.data);
-    setCards(await response.data);
+    let response: any;
+    console.log("test");
+    try {
+      response = await Axios.get('http://localhost:8000/api/v1/card/ffa', {
+        headers: {
+          Authorization: token,
+        }
+      });
+      // const test_var = response.data.blueCards[0];
+      let blueCardList: any = [];
+      response.data.blueCards.forEach((element: any) => {
+        blueCardList.push(element.answer);
+      });
+      console.log(blueCardList);
+      setCards({ redCard: response.data.redCard.question });
+      setBlueCards(blueCardList);
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
   return (
@@ -30,37 +46,20 @@ function Gameplay() {
       </Center>
       <Center>
         <Text>
-          {cards.redCard.question}
-          {/* Hello */}
+          {JSON.stringify(cards.redCard)}
         </Text>
       </Center>
       <VStack spacing={8} direction='column'>
         <Center>
-          <Link to='/home'>
-            <Button colorScheme='blue' m="8">
-              {cards.blueCards[0].answer}
-            </Button>
-          </Link>
-          <Link to='/home'>
-            <Button colorScheme='blue' m="8">
-              {cards.blueCards[1].answer}
-            </Button>
-          </Link>
-          <Link to='/home'>
-            <Button colorScheme='blue' m="8">
-              {cards.blueCards[2].answer}
-            </Button>
-          </Link>
-          <Link to='/home'>
-            <Button colorScheme='blue' m="8">
-              {cards.blueCards[3].answer}
-            </Button>
-          </Link>
-          <Link to='/home'>
-            <Button colorScheme='blue' m="8">
-              {cards.blueCards[4].answer}
-            </Button>
-          </Link>
+          {blueCards.map((index: any) => {
+            return (
+              <Link to='/home'>
+                <Button colorScheme='blue' m="8">
+                  {JSON.stringify(index)}
+                </Button>
+              </Link>
+            );
+          })}
         </Center>
       </VStack>
     </Stack>

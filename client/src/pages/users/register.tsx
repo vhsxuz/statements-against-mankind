@@ -18,7 +18,7 @@ function Register() {
       password: passwordReg,
     }).then((response) => {
       console.log(response);
-      navigate("/login");
+      navigate("/");
     }).catch((error) => {
       console.log(error);
     });
@@ -45,7 +45,7 @@ function Register() {
             setPasswordReg(e.target.value);
           }}
         />
-        <Link to="/login">
+        <Link to="/">
           <Button colorScheme='teal' mt="4" onClick={register}>
             Sign Up
           </Button>
